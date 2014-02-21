@@ -28,6 +28,8 @@ class AboutMethods < Neo::Koan
     #
     # Rewrite the eval string to continue.
     #
+
+    assert_equal(5, my_global_method(2, 3))
   end
 
   # NOTE: wrong number of arguments is not a SYNTAX error, but a
