@@ -31,22 +31,19 @@ require File.expand_path(File.dirname(__FILE__) + '/neo')
 
 def score(dice)
   score = 0
-  (1..6).each do |i|
-    size = dice.select { |m| m == i }.size
-    case i
-    when 1
-      score += 1000 if size >= 3
-      if size % 3 != 0
-        score += 100 * (size % 3)
-      end
-    else
-      score += 100 * i if size >= 3
-      if i == 5 && size % 3 != 0
-        score += 50 * (size % 3)
-      else
-      end
+  ones = dice.count(1)
+  fives = dice.count(5)
+
+  score += 1000 if ones >= 3
+  score += 100 * (ones % 3)
+  score += 50 * (fives % 3)
+
+  dice.uniq.each do |roll|
+    if dice.count(roll) >= 3
+      score += 100 * roll unless roll == 1
     end
   end
+
   score
 end
 
